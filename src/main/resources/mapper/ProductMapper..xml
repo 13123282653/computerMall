@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--1.映射文件的namespace要和mapper接口的全类名保持一致
+    2.映射文件中的SQL语句的id要和mapper接口中的方法名一致
+-->
+<!--resultType写的是这个接口对应的实体类的类名-->
+<mapper namespace="com.cy.store.mapper.ProductMapper">
+    <resultMap id="ProductEntityMap" type="com.cy.store.entity.Product">
+        <id column="id" property="id"></id>
+        <result column="category_id" property="categoryId"/>
+        <result column="item_type" property="itemType"/>
+        <result column="sell_point" property="sellPoint"/>
+        <result column="created_user" property="createdUser"/>
+        <result column="created_time" property="createdTime"/>
+        <result column="modified_user" property="modifiedUser"/>
+        <result column="modified_time" property="modifiedTime"/>
+    </resultMap>
+
+
+    <!--List<Product> findHotList();-->
+    <select id="findHotList" resultMap="ProductEntityMap">
+        select * from t_product where status=1 order by priority limit 0,4
+    </select>
+
+    <!-- Product findById(Integer id) -->
+    <select id="findById" resultMap="ProductEntityMap">
+        select * from t_product where id=#{id}
+    </select>
+
+
+
+</mapper>

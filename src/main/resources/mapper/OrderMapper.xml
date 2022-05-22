@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--1.映射文件的namespace要和mapper接口的全类名保持一致
+    2.映射文件中的SQL语句的id要和mapper接口中的方法名一致
+-->
+<!--resultType写的是这个接口对应的实体类的类名-->
+<mapper namespace="com.cy.store.mapper.OrderMapper">
+
+    <!-- 插入订单数据：Integer insertOrder(Order order) -->
+    <insert id="insertOrder" useGeneratedKeys="true" keyProperty="oid">
+        insert into t_order (
+            uid, recv_name, recv_phone, recv_province, recv_city, recv_area,recv_address,
+            total_price,status, order_time, pay_time, created_user, created_time,
+            modified_user,modified_time
+        ) values (
+                     #{uid}, #{recvName}, #{recvPhone}, #{recvProvince}, #{recvCity}, #{recvArea},
+                     #{recvAddress}, #{totalPrice}, #{status}, #{orderTime}, #{payTime}, #{createdUser},
+                     #{createdTime}, #{modifiedUser}, #{modifiedTime}
+                 )
+    </insert>
+
+    <!-- 插入订单商品数据：Integer insertOrderItem(OrderItem orderItem) -->
+    <insert id="insertOrderItem" useGeneratedKeys="true" keyProperty="id">
+        insert into t_order_item (
+            oid, pid, title, image, price, num, created_user,
+            created_time, modified_user, modified_time
+        ) values (
+                     #{oid}, #{pid}, #{title}, #{image}, #{price}, #{num}, #{createdUser},
+                     #{createdTime}, #{modifiedUser}, #{modifiedTime}
+                 )
+    </insert>
+
+
+</mapper>
